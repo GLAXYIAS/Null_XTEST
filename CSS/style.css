@@ -1,1 +1,185 @@
+/* ====================== NULL_X V2.17 - BRAND NEW CSS ====================== */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background: #0f0f0f;
+    color: #00ff41;
+    overflow: hidden;
+    height: 100vh;
+    user-select: none;
+}
+
+/* ====================== SCREENS ====================== */
+
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ====================== BOOT SCREEN ====================== */
+
+#boot-screen {
+    background: #111111;
+}
+
+.terminal {
+    background: #0a0a0a;
+    border: 3px solid #00ff41;
+    padding: 50px 80px;
+    box-shadow: 0 0 40px rgba(0, 255, 65, 0.4);
+    text-align: center;
+    min-width: 520px;
+}
+
+.green-text {
+    font-size: 1.55rem;
+    line-height: 2.4rem;
+    min-height: 160px;
+    color: #00ff41;
+    text-shadow: 0 0 12px #00ff41;
+    font-weight: bold;
+}
+
+/* ====================== WELCOME SCREEN ====================== */
+
+#welcome-screen {
+    background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+}
+
+.welcome-content {
+    text-align: center;
+    padding: 40px;
+}
+
+.welcome-content h1 {
+    font-size: 4.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+}
+
+.highlight {
+    color: #00ff80;
+    text-shadow: 0 0 20px #00ff41;
+}
+
+.version {
+    font-size: 2.1rem;
+    color: #00cc33;
+    font-weight: 400;
+}
+
+.cloak-instruction {
+    margin-top: 80px;
+    font-size: 1.65rem;
+    color: #666666;
+    animation: pulse 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* ====================== MAIN DASHBOARD ====================== */
+
+#main-screen {
+    background: #0a0a0a;
+}
+
+header {
+    background: #111111;
+    padding: 25px 0;
+    text-align: center;
+    border-bottom: 3px solid #00ff41;
+    box-shadow: 0 4px 15px rgba(0, 255, 65, 0.2);
+}
+
+header h2 {
+    font-size: 2.4rem;
+    letter-spacing: 6px;
+    color: #00ff41;
+    text-shadow: 0 0 15px #00ff41;
+}
+
+/* Cards Container */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 80px 20px;
+    flex-wrap: wrap;
+}
+
+/* Individual Cards */
+.card {
+    background: #111111;
+    border: 3px solid #00ff41;
+    width: 290px;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.card:hover {
+    background: #1a1a1a;
+    border-color: #00ff80;
+    transform: translateY(-15px) scale(1.08);
+    box-shadow: 0 0 40px rgba(0, 255, 65, 0.6);
+}
+
+.card h3 {
+    font-size: 2.1rem;
+    margin-bottom: 12px;
+    color: #00ff41;
+    text-shadow: 0 0 10px #00ff41;
+}
+
+.card p {
+    font-size: 1.1rem;
+    color: #00cc33;
+    text-align: center;
+    max-width: 200px;
+    line-height: 1.4;
+}
+
+/* ====================== RESPONSIVE ====================== */
+
+@media (max-width: 900px) {
+    .cards-container {
+        gap: 25px;
+        padding: 60px 15px;
+    }
+    
+    .card {
+        width: 260px;
+        height: 220px;
+    }
+    
+    .welcome-content h1 {
+        font-size: 3.2rem;
+    }
+}
