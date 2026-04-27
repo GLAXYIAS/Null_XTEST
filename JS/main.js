@@ -34,24 +34,26 @@ function startBootSequence() {
     }
 }
 
-// Cloak function - triggered when clicking on welcome screen
 function activateCloak() {
-    // Try to close tab (works only if opened by script)
-    try {
-        window.close();
-    } catch (e) {
-        // Most browsers block window.close(), so we continue to main screen
-    }
+    // Change title immediately for cloak
+    document.title = "Google Docs";
 
-    // Switch to main dashboard
+    // Hide welcome and show main dashboard
     const welcomeScreen = document.getElementById('welcome-screen');
     const mainScreen = document.getElementById('main-screen');
 
     if (welcomeScreen) welcomeScreen.classList.add('hidden');
     if (mainScreen) mainScreen.classList.remove('hidden');
 
-    // Change title for stealth (common trick)
-    document.title = "Google Docs";
+    // Try to close tab AFTER showing the dashboard (better behavior)
+    setTimeout(() => {
+        try {
+            window.close();
+        } catch (e) {
+            // Normal - most browsers block auto-close
+            console.log("Tab close was blocked - dashboard shown instead");
+        }
+    }, 100);
 }
 
 // Navigation for the three cards
