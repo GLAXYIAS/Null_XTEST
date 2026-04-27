@@ -1,6 +1,18 @@
 // ====================== NULL_X V2.17 - MAIN.JS ======================
 // This file works with index.html in root + CSS in CSS/ folder
+// Check if the page was opened in cloak mode (via iframe)
+const urlParams = new URLSearchParams(window.location.search);
+const isCloaked = urlParams.get('cloaked') === 'true';
 
+// If it's already cloaked, skip boot and welcome screens and go straight to main dashboard
+if (isCloaked) {
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('boot-screen').classList.add('hidden');
+        document.getElementById('welcome-screen').classList.add('hidden');
+        document.getElementById('main-screen').classList.remove('hidden');
+        document.title = "Google Docs";
+    });
+}
 const bootPhrases = [
     "INITIALIZING NULL_X CORE...",
     "BYPASSING LINEWISE FILTERS...",
