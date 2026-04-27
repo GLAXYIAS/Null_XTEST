@@ -1,56 +1,66 @@
 // ====================== NULL_X V2.17 - MAIN.JS ======================
+// This file works with index.html in root + CSS in CSS/ folder
 
-// Boot screen phrases
 const bootPhrases = [
     "INITIALIZING NULL_X CORE...",
-    "LOADING DATABASE...",
-    "ESTABLISHING SECURE TUNNEL...",
+    "BYPASSING LINEWISE FILTERS...",
+    "LOADING GAME DATABASE...",
     "NULL_X V2.17 ONLINE"
 ];
 
 let phraseIndex = 0;
+
+// Boot Screen Elements
 const greenTextEl = document.getElementById('green-text');
 
-// Function to cycle through boot phrases
+// Start the boot animation
 function startBootSequence() {
+    if (!greenTextEl) return;
+
     greenTextEl.textContent = bootPhrases[phraseIndex];
-    
     phraseIndex++;
-    
+
     if (phraseIndex < bootPhrases.length) {
-        // Continue to next phrase
-        setTimeout(startBootSequence, 750);
+        setTimeout(startBootSequence, 750);     // Change phrase every 750ms
     } else {
-        // All phrases done → switch to welcome screen after short delay
+        // All phrases done → go to welcome screen
         setTimeout(() => {
-            document.getElementById('boot-screen').classList.add('hidden');
-            document.getElementById('welcome-screen').classList.remove('hidden');
+            const bootScreen = document.getElementById('boot-screen');
+            const welcomeScreen = document.getElementById('welcome-screen');
+            
+            if (bootScreen) bootScreen.classList.add('hidden');
+            if (welcomeScreen) welcomeScreen.classList.remove('hidden');
         }, 900);
     }
 }
 
-// Cloak function (Click anywhere on welcome screen)
+// Cloak function - triggered when clicking on welcome screen
 function activateCloak() {
-    // Try to close the tab (works if opened via JS/bookmarklet)
+    // Try to close tab (works only if opened by script)
     try {
         window.close();
     } catch (e) {
-        // Do nothing - most browsers block it
+        // Most browsers block window.close(), so we continue to main screen
     }
 
-    // Fallback: Go to main dashboard
-    document.getElementById('welcome-screen').classList.add('hidden');
-    document.getElementById('main-screen').classList.remove('hidden');
+    // Switch to main dashboard
+    const welcomeScreen = document.getElementById('welcome-screen');
+    const mainScreen = document.getElementById('main-screen');
 
-    // Optional: Change title for better stealth
+    if (welcomeScreen) welcomeScreen.classList.add('hidden');
+    if (mainScreen) mainScreen.classList.remove('hidden');
+
+    // Change title for stealth (common trick)
     document.title = "Google Docs";
 }
 
-// Simple navigation between sections (placeholder for now)
+// Navigation for the three cards
 function navigateTo(section) {
     if (section === 'games') {
-        alert("🎮 Games section coming soon!\n\nWe'll load games from config.js here.");
-        // Later: hide main-screen and show games page
+        // TODO: We'll replace this alert later with actual games page using config.js
+        alert("🎮 Opening Games...\n\n(Game section with config.js coming next)");
+        
+        // Future code will go here to load games
     } 
     else if (section === 'proxy') {
         alert("🌐 Proxy section coming soon!");
@@ -60,25 +70,27 @@ function navigateTo(section) {
     }
 }
 
-// ====================== EVENT LISTENERS ======================
-
+// ====================== INITIALIZE EVERYTHING ======================
 document.addEventListener('DOMContentLoaded', () => {
-    // Start the boot animation when page loads
+    
+    // Start boot sequence
     startBootSequence();
 
-    // Make the entire welcome screen clickable for cloak
+    // Make welcome screen clickable for cloak
     const welcomeScreen = document.getElementById('welcome-screen');
-    welcomeScreen.addEventListener('click', activateCloak);
+    if (welcomeScreen) {
+        welcomeScreen.addEventListener('click', activateCloak);
+    }
 
-    // Keyboard support: Press any key on welcome screen to cloak
+    // Allow pressing any key on welcome screen to cloak
     document.addEventListener('keydown', (e) => {
-        if (!document.getElementById('welcome-screen').classList.contains('hidden')) {
+        if (welcomeScreen && !welcomeScreen.classList.contains('hidden')) {
             activateCloak();
         }
     });
-});
 
-// Bonus: Prevent right-click menu on the whole site (common for these kinds of sites)
-document.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
+    // Disable right-click menu (common for unblocked game sites)
+    document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+    });
 });
