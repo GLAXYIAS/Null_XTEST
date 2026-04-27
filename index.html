@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Null_X</title>
     
-    <!-- Correct paths for your folder structure -->
+    <!-- Correct paths -->
     <link rel="stylesheet" href="CSS/style.css">
     <script src="JS/main.js" defer></script>
+    <script src="JS/config.js"></script>   <!-- Updated path: it's inside JS/ folder -->
 </head>
 <body>
 
-    <!-- Boot Screen (Grey with green text) -->
+    <!-- Boot Screen -->
     <div id="boot-screen" class="screen">
         <div class="terminal">
             <div id="green-text" class="green-text"></div>
@@ -26,28 +27,23 @@
         </div>
     </div>
 
-    <!-- Main Dashboard with 3 Cards -->
-    <div id="main-screen" class="screen hidden">
-            <!-- ====================== MAIN DASHBOARD ====================== -->
+    <!-- Main Dashboard -->
     <div id="main-screen" class="screen hidden">
         <header>
             <h2>NULL_X V2.17</h2>
         </header>
 
         <div class="cards-container">
-            <!-- Games Card -->
             <div class="card" onclick="navigateTo('games')">
                 <h3>🎮 Games</h3>
                 <p>Browse & play unblocked games</p>
             </div>
 
-            <!-- Proxy Card -->
             <div class="card" onclick="navigateTo('proxy')">
                 <h3>🌐 Proxy</h3>
                 <p>Web proxy & unblocker</p>
             </div>
 
-            <!-- Settings Card -->
             <div class="card" onclick="navigateTo('settings')">
                 <h3>⚙️ Settings</h3>
                 <p>Customize your experience</p>
