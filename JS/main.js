@@ -35,27 +35,45 @@ function startBootSequence() {
 }
 
 function activateCloak() {
-    // Change title immediately for cloak
+    // Step 1: Change title for stealth
     document.title = "Google Docs";
 
-    // Hide welcome and show main dashboard
+    // Step 2: Show the main dashboard
     const welcomeScreen = document.getElementById('welcome-screen');
     const mainScreen = document.getElementById('main-screen');
 
     if (welcomeScreen) welcomeScreen.classList.add('hidden');
     if (mainScreen) mainScreen.classList.remove('hidden');
 
-    // Try to close tab AFTER showing the dashboard (better behavior)
-    setTimeout(() => {
-        try {
-            window.close();
-        } catch (e) {
-            // Normal - most browsers block auto-close
-            console.log("Tab close was blocked - dashboard shown instead");
-        }
-    }, 100);
-}
+    // Step 3: Open this page in a new about:blank tab (this is the key part you want)
+    const currentUrl = window.location.href;
+    
+    const newTab = window.open('about:blank', '_blank');
+    
+    if (newTab) {
+        // Write the current page into the new tab
+        newTab.document.write(`
+            <html>
+                <head>
+                    <title>Google Docs</title>
+                    <style>body { margin:0; padding:0; overflow:hidden; }</style>
+                </head>
+                <body>
+                    <iframe src="${currentUrl}" style="width:100vw; height:100vh; border:none;"></iframe>
+                </body>
+            </html>
+        `);
+        newTab.document.close();
 
+        // Optional: Try to close the original tab (many school filters block this)
+        setTimeout(() => {
+            try { window.close(); } catch(e) {}
+        }, 300);
+    } else {
+        // Fallback if popup is blocked
+        alert("Popup blocked! Please allow popups for this site or click again.");
+    }
+}
 // Navigation for the three cards
 function navigateTo(section) {
     if (section === 'games') {
