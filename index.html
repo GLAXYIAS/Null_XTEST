@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Null_X</title>
+    
+    <!-- Correct paths for your folder structure -->
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="JS/main.js" defer></script>
+</head>
+<body>
+
+    <!-- Boot Screen (Grey with green text) -->
+    <div id="boot-screen" class="screen">
+        <div class="terminal">
+            <div id="green-text" class="green-text"></div>
+        </div>
+    </div>
+
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="screen hidden">
+        <div class="welcome-content">
+            <h1>Welcome to <span class="highlight">Null_X</span> <span class="version">V2.17</span></h1>
+            <p class="cloak-instruction">Click anywhere to cloak</p>
+        </div>
+    </div>
+
+    <!-- Main Dashboard with 3 Cards -->
+    <div id="main-screen" class="screen hidden">
+        <header>
+            <h2>NULL_X V2.17</h2>
+        </header>
+
+        <div class="cards-container">
+            <div class="card" onclick="navigateTo('games')">
+                <h3>🎮 Games</h3>
+                <p>Browse & play unblocked games</p>
+            </div>
+
+            <div class="card" onclick="navigateTo('proxy')">
+                <h3>🌐 Proxy</h3>
+                <p>Web proxy & unblocker</p>
+            </div>
+
+            <div class="card" onclick="navigateTo('settings')">
+                <h3>⚙️ Settings</h3>
+                <p>Customize your experience</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
