@@ -35,43 +35,46 @@ function startBootSequence() {
 }
 
 function activateCloak() {
-    // Step 1: Change title for stealth
+    // Change title for cloak
     document.title = "Google Docs";
 
-    // Step 2: Show the main dashboard
+    // Show main dashboard immediately
     const welcomeScreen = document.getElementById('welcome-screen');
     const mainScreen = document.getElementById('main-screen');
 
     if (welcomeScreen) welcomeScreen.classList.add('hidden');
     if (mainScreen) mainScreen.classList.remove('hidden');
 
-    // Step 3: Open this page in a new about:blank tab (this is the key part you want)
+    // Open the site in a new about:blank tab (with iframe)
     const currentUrl = window.location.href;
     
     const newTab = window.open('about:blank', '_blank');
     
     if (newTab) {
-        // Write the current page into the new tab
         newTab.document.write(`
-            <html>
-                <head>
-                    <title>Google Docs</title>
-                    <style>body { margin:0; padding:0; overflow:hidden; }</style>
-                </head>
-                <body>
-                    <iframe src="${currentUrl}" style="width:100vw; height:100vh; border:none;"></iframe>
-                </body>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Google Docs</title>
+                <style>
+                    body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#0a0a0a; }
+                    iframe { width:100vw; height:100vh; border:none; }
+                </style>
+            </head>
+            <body>
+                <iframe src="${currentUrl}?cloaked=true"></iframe>
+            </body>
             </html>
         `);
         newTab.document.close();
 
-        // Optional: Try to close the original tab (many school filters block this)
+        // Optional: Try to close original tab
         setTimeout(() => {
             try { window.close(); } catch(e) {}
-        }, 300);
+        }, 400);
     } else {
-        // Fallback if popup is blocked
-        alert("Popup blocked! Please allow popups for this site or click again.");
+        alert("Popup was blocked. Please allow popups for this site.");
     }
 }
 // Navigation for the three cards
